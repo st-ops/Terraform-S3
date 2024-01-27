@@ -10,7 +10,6 @@ variable "versioning" {
     default = false
 }
 
-
 variable "public_acl" {
     type = bool
     description = "Set to true to enable Public"

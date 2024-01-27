@@ -1,4 +1,4 @@
-==============AWS S3 Bucket Module==============
+================AWS S3 Bucket Module================
 
 This repo contains a Terraform/OpenTF module for creating an AWS S3 bucket, with the user being able to choose on versioning, and ACLs. 
 
@@ -25,3 +25,10 @@ For more information on ACLs : https://docs.aws.amazon.com/AmazonS3/latest/userg
 
 1) ID of the created bucket
 2) The bucket's unique Amazon Resource Name (ARN)
+
+
+==================MODULE USAGE==================
+
+1) Use the module keyword, and paste the URL of the desired release (All commits are tagged) in the source parameter, as a string.
+
+2) 'bucket_name' is a required parameter, others are optional.

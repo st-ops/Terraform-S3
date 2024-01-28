@@ -20,12 +20,13 @@ resource "aws_s3_bucket_ownership_controls" "my_oc" {
   }
 }
 
-resource "aws_s3_bucket_acl" "private_acl" {
-  count = var.public_acl ? 0:1
-
+resource "aws_s3_bucket_acl" "acl" {
   bucket = aws_s3_bucket.my_bucket.id
-  depends_on = [ aws_s3_bucket_ownership_controls.my_oc ]
-  acl = "private"
+  #If public_acl variable is set to true,
+  #      the first set of rules apply (i.e.,rules for public access), 
+  #           else rules for Private ACLs apply.
+  depends_on = var.public_acl ? [ aws_s3_bucket_ownership_controls.my_oc , aws_s3_bucket_public_access_block.s3_access_block ] : [ aws_s3_bucket_ownership_controls.my_oc ]
+  acl = var.public_acl ? "public-read" : "private"
 }
 
 resource "aws_s3_bucket_public_access_block" "s3_access_block" {
@@ -40,12 +41,3 @@ resource "aws_s3_bucket_public_access_block" "s3_access_block" {
   ignore_public_acls = false
 }
 
-resource "aws_s3_bucket_acl" "public_acl" {
-  #Only executes if user inputs true, else count becomes zero.
-  count = var.public_acl ? 1:0
-
-  bucket = aws_s3_bucket.my_bucket.id
-  depends_on = [ aws_s3_bucket_ownership_controls.my_oc , aws_s3_bucket_public_access_block.s3_access_block ]
-
-  acl = "public-read"
-}

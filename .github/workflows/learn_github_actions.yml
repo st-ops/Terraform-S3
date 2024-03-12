@@ -1,0 +1,26 @@
+env:
+  access_key: {{secrets.access_key}}
+  secret_key: {{secrets.secret_key}}
+
+
+
+
+name: learn-github-actions
+run-name: ${{ github.actor }} is learning GitHub Actions
+on: [push]
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: hashicorp/setup-terraform@v3
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: "us-east-1"
+          aws-access-key-id: {{env.access_key}}
+          aws-secret-access-key: {{env.secret_key}}
+      - uses: actions/checkout@v4
+      - run: terraform init
+      - run: terraform plan
+      - run: terraform apply -auto-approve
+      - run: sleep 120s
+      - run: terraform destroy

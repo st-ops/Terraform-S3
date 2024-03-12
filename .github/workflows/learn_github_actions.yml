@@ -3,17 +3,17 @@ run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push]
 jobs:
   terraform_run:
-    env:
-      access_key: AKIARFOEZD4CKOUMEORI
-      secret_key: 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
+    # env:
+    #   access_key: AKIARFOEZD4CKOUMEORI
+    #   secret_key: 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
     runs-on: ubuntu-22.04
     steps:
       - uses: hashicorp/setup-terraform@v3
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: "us-east-1"
-          aws-access-key-id: ${{env.access_key}}
-          aws-secret-access-key: ${{env.secret_key}}
+          aws-access-key-id: ${secrets.access_key}}
+          aws-secret-access-key: ${{github.secrets.secret_key}}
       - uses: actions/checkout@v4
       - run: terraform init
       - run: terraform plan

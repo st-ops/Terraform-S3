@@ -1,6 +1,7 @@
 variable "bucket_name" {
     type = string
     description = "Please provide a globally unique name for your bucket."
+    default = "akiraa_github_actions_bucket"
 }
 
 

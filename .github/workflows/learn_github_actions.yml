@@ -2,10 +2,10 @@ name: learn-github-actions
 run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push]
 jobs:
-  check-bats-version:
+  terraform_run:
     env:
-    access_key: {{secrets.access_key}}
-    secret_key: {{secrets.secret_key}}
+    access_key: AKIARFOEZD4CKOUMEORI
+    secret_key: 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
     runs-on: ubuntu-22.04
     steps:
       - uses: hashicorp/setup-terraform@v3

@@ -1,5 +1,5 @@
 name: learn-github-actions
-run-name: ${{ github.dev }} is learning GitHub Actions
+run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push]
 jobs:
   terraform_run:
@@ -20,3 +20,4 @@ jobs:
       - run: terraform apply -auto-approve
       - run: sleep 120s
       - run: terraform destroy -auto-approve
+      - run: exit

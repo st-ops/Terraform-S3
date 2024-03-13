@@ -6,18 +6,17 @@ jobs:
     # env:
     #   access_key: AKIARFOEZD4CKOUMEORI
     #   secret_key: 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
-    #sdfjsifjiosdjfsjfipsejfisnifeinifio
     runs-on: ubuntu-22.04
     steps:
       - uses: hashicorp/setup-terraform@v3
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: "us-east-1"
-          aws-access-key-id: ${secrets.ACCESS_KEY}}
+          aws-access-key-id: ${{secrets.ACCESS_KEY}}
           aws-secret-access-key: ${{secrets.SECRET_KEY}}
       - uses: actions/checkout@v4
       - run: terraform init
       - run: terraform plan
       - run: terraform apply -auto-approve
       - run: sleep 120s
-      - run: terraform destroy
+      - run: terraform destroy -auto-approve
